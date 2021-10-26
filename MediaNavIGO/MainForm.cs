@@ -68,6 +68,7 @@ namespace MediaNavIGO
             ALL_FILTERS.AddRange(FILTER_OF_FOLDER_UX);
             //
             LoadConfig();
+            UpdateStatus();
         }
 
         private void SetUSBFolderToolStripMenuItem_Click(object sender, EventArgs e)
