@@ -1,9 +1,9 @@
 <!-- define variables -->
 [1.1]: http://i.imgur.com/M4fJ65n.png (ATTENTION)
 
-MediaNavIGO<br /><!--[![Build status](https://ci.appveyor.com/api/projects/status/fsp470bmrsl64kyp/branch/master?svg=true)](https://ci.appveyor.com/project/RocketBot/MediaNavIGO/branch/master) [![Github All Releases](https://img.shields.io/github/downloads/Furtif/MediaNavIGO/total.svg?maxAge=750)](https://github.com/Furtif/MediaNavIGO/releases) -->
-[![GitHub license](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/Furtif/MediaNavIGO/blob/master/License.md) 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/rocketbot) [![Sponsor](https://img.shields.io/badge/Sponsor-Link-brightgreen.svg)](https://github.com/sponsors/Furtif) [![Discord](https://img.shields.io/discord/335455302965002242?label=Discord&style=flat-square)](https://discord.gg/rkm4xhX)
+MediaNavIGO <br /><!--[![Build status](https://ci.appveyor.com/api/projects/status/fsp470bmrsl64kyp/branch/master?svg=true)](https://ci.appveyor.com/project/RocketBot/MediaNavIGO/branch/master) [![Github All Releases](https://img.shields.io/github/downloads/Furtif/MediaNavIGO/total.svg?maxAge=750)](https://github.com/Furtif/MediaNavIGO/releases) -->
+[![.github/workflows/dotnet.yml](https://github.com/Furtif/MediaNavIGO/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Furtif/MediaNavIGO/actions/workflows/dotnet.yml) [![GitHub license](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/Furtif/MediaNavIGO/blob/master/License.md) 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/rocketbot) [![Sponsor](https://img.shields.io/badge/Sponsor-Link-brightgreen.svg)](https://github.com/sponsors/Furtif)
 ===================
 
 ![alt text][1.1] <strong><em>`The contents of this repo are a proof of concept and are for educational use only`</em></strong>![alt text][1.1]<br/>
