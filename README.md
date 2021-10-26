@@ -43,9 +43,6 @@ git submodule update --init --recursive
 
  You can contribute in many ways, here are some that you can do to help the project out!
 
-### `Join discord channel and help answer questions`
- We have more and more users everyday, so we have a lot of questions from new users who haven't fully understand how the bot works yet. If you want to help them out, join our official discord channel :)
-
 ### `Answer questions`
  Same as above, you can help by answering questions in the [issues](https://github.com/Furtif/MediaNavIGO/issues) tab!
 
