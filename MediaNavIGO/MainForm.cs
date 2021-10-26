@@ -521,7 +521,7 @@ namespace MediaNavIGO
 
         private void LoadConfig()
         {
-            if (config.USBPath != null && Directory.Exists(config.USBPath) && File.Exists(config.USBPath + @"\device_status.ini"))
+            if (config.USBPath != null && Directory.Exists(config.USBPath)) //Ignore for create mode && File.Exists(config.USBPath + @"\device_status.ini"))
                 LoadUSBFolder();
             if (config.LOCALPath != null && Directory.Exists(config.LOCALPath))
                 LoadLocalolder();
