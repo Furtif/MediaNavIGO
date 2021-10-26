@@ -242,7 +242,7 @@
             this.tabPageLocal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageLocal.Name = "tabPageLocal";
             this.tabPageLocal.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPageLocal.Size = new System.Drawing.Size(1317, 468);
+            this.tabPageLocal.Size = new System.Drawing.Size(1317, 482);
             this.tabPageLocal.TabIndex = 1;
             this.tabPageLocal.Text = "Work\'s folder";
             this.tabPageLocal.UseVisualStyleBackColor = true;
@@ -270,7 +270,7 @@
             this.fastObjectListViewLocal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fastObjectListViewLocal.Name = "fastObjectListViewLocal";
             this.fastObjectListViewLocal.ShowGroups = false;
-            this.fastObjectListViewLocal.Size = new System.Drawing.Size(1311, 464);
+            this.fastObjectListViewLocal.Size = new System.Drawing.Size(1311, 478);
             this.fastObjectListViewLocal.TabIndex = 1;
             this.fastObjectListViewLocal.UseCellFormatEvents = true;
             this.fastObjectListViewLocal.UseCompatibleStateImageBehavior = false;
@@ -329,7 +329,7 @@
             this.tabPageUSB.Location = new System.Drawing.Point(4, 29);
             this.tabPageUSB.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageUSB.Name = "tabPageUSB";
-            this.tabPageUSB.Size = new System.Drawing.Size(1317, 468);
+            this.tabPageUSB.Size = new System.Drawing.Size(1317, 482);
             this.tabPageUSB.TabIndex = 0;
             this.tabPageUSB.Text = "NaviSync folder";
             this.tabPageUSB.UseVisualStyleBackColor = true;
@@ -351,7 +351,7 @@
             this.fastObjectListViewUSB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.fastObjectListViewUSB.Name = "fastObjectListViewUSB";
             this.fastObjectListViewUSB.ShowGroups = false;
-            this.fastObjectListViewUSB.Size = new System.Drawing.Size(1317, 468);
+            this.fastObjectListViewUSB.Size = new System.Drawing.Size(1317, 482);
             this.fastObjectListViewUSB.TabIndex = 0;
             this.fastObjectListViewUSB.UseCellFormatEvents = true;
             this.fastObjectListViewUSB.UseCompatibleStateImageBehavior = false;
@@ -377,7 +377,7 @@
             this.pictureBoxAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxAbout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxAbout.Image = global::MediaNavIGO.Resources.Resources.PayPalDonateNow;
-            this.pictureBoxAbout.Location = new System.Drawing.Point(1206, 516);
+            this.pictureBoxAbout.Location = new System.Drawing.Point(1206, 517);
             this.pictureBoxAbout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxAbout.Name = "pictureBoxAbout";
             this.pictureBoxAbout.Size = new System.Drawing.Size(94, 20);

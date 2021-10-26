@@ -67,6 +67,8 @@ namespace MediaNavIGO
             ALL_FILTERS.AddRange(FILTER_OF_FOLDER_NAVI_ROOT);
             ALL_FILTERS.AddRange(FILTER_OF_FOLDER_UX);
             //
+            deviceInfos.Add("[?]_init_mode", @"select folders first...");
+            fastObjectListViewDevice.SetObjects(deviceInfos);
             LoadConfig();
             UpdateStatus();
         }
