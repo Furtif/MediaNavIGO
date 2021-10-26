@@ -8,8 +8,8 @@ namespace MediaNavIGO.Models
 {
     public class Config
     {
-        public string USBPath { get; set; } = @"D:\NaviSync";
-        public string LOCALPath { get; set; } = @"C:\Users\msntc\Downloads\360\iGO R3 HERE [Navteq] 2020.(Q4) EUROPE";
+        public string USBPath { get; set; }
+        public string LOCALPath { get; set; }
         public bool OnlyPresentInUsb { get; set; } = true;
     }
 }
