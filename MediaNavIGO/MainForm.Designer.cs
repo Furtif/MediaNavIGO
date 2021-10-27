@@ -87,6 +87,7 @@
             this.tabControlMain.SuspendLayout();
             this.tabPageConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).BeginInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.SuspendLayout();
             // 
             // ContextMenuStripUSB
@@ -377,7 +378,7 @@
             this.pictureBoxAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxAbout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxAbout.Image = global::MediaNavIGO.Resources.Resources.PayPalDonateNow;
-            this.pictureBoxAbout.Location = new System.Drawing.Point(1206, 517);
+            this.pictureBoxAbout.Location = new System.Drawing.Point(1206, 518);
             this.pictureBoxAbout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBoxAbout.Name = "pictureBoxAbout";
             this.pictureBoxAbout.Size = new System.Drawing.Size(94, 20);

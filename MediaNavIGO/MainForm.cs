@@ -34,6 +34,7 @@ namespace MediaNavIGO
         //
         private Config config = new();
         private bool IsMNV3 = false;
+        private string configfile = "MediaNavIGO.json";
 
         public MainForm()
         {
@@ -349,6 +350,12 @@ namespace MediaNavIGO
             config.OnlyPresentInUsb = checkBoxOnlyExists.Checked;
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string data = JsonUtils.ToJson(config, true);
+            File.WriteAllText(configfile, data);
+        }
+
         private void UpdateStatus()
         {
             buttonStartUpdate.Enabled = false;
@@ -503,6 +510,8 @@ namespace MediaNavIGO
                 return FolderType.CONTENT;
             else if (item.ToLower().Contains(@"\save\"))
                 return FolderType.SAVE;
+            else if (item.ToLower().Contains(@"navisync"))
+                return FolderType.NAVI_ROOT;
             else if (item.ToLower().Contains('\\'))
                 return FolderType.NAVI_ROOT;
             else
@@ -523,6 +532,11 @@ namespace MediaNavIGO
 
         private void LoadConfig()
         {
+            if (File.Exists(configfile))
+            {
+                string data = File.ReadAllText(configfile);
+                config = JsonUtils.FromJson<Config>(data);
+            }
             if (config.USBPath != null && Directory.Exists(config.USBPath)) //Ignore for create mode && File.Exists(config.USBPath + @"\device_status.ini"))
                 LoadUSBFolder();
             if (config.LOCALPath != null && Directory.Exists(config.LOCALPath))

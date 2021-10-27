@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <Version>1.0.0.0</Version>
+    <Copyright>Copyright ©  2016-2021</Copyright>
+    <Product>MediaNavIGO</Product>
+    <Company>RocketBot</Company>
+    <PackageId>MediaNavIGO</PackageId>
+    <Description>An alternative to toolbox</Description>
+    <Authors>--=FurtiF™=--</Authors>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
