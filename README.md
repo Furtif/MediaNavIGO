@@ -16,7 +16,7 @@ Download the bot from the [release](https://github.com/Furtif/MediaNavIGO/releas
 
 ### `Dependencies`
  - Microsoft [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
- - Microsoft [VisualStudio 2022](https://visualstudio.microsoft.com/fr/vs/preview/)
+ <!-- Microsoft [VisualStudio 2022](https://visualstudio.microsoft.com/fr/vs/preview/)-->
 
 ## `Developers and Contributors`
 
