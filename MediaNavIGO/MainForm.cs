@@ -34,6 +34,7 @@ namespace MediaNavIGO
         //
         private Config config = new();
         private bool IsMNV3 = false;
+        private bool IsCreationMode = false;
         private string configfile = "MediaNavIGO.json";
 
         public MainForm()
@@ -237,8 +238,11 @@ namespace MediaNavIGO
                                         contstm = contstm.Replace(s.Split("=")[1].Trim(), md5);
                                     }
                                 }
-                                File.WriteAllText(c.FullPath, contstm);
-                                //File.WriteAllText(c.FullPath + ".md5", GenerateMD5(c.FullPath));                   
+                                if (!IsCreationMode) // ignore *.stm files if in creation mode.
+                                {
+                                    File.WriteAllText(c.FullPath, contstm);
+                                    //File.WriteAllText(c.FullPath + ".md5", GenerateMD5(c.FullPath));
+                                }
                             }
                         }
                         catch (UnauthorizedAccessException)// ex)
@@ -304,9 +308,12 @@ namespace MediaNavIGO
                     }
                     string file = p + i.RealName;
                     File.Copy(i.FullPath, file, true);
-                    //File.WriteAllText(file + ".stm", "purpose=\"copy\"");
-                    //File.WriteAllText(file + ".md5", GenerateMD5(file));
-                    //File.WriteAllText(file + ".stm.md5", GenerateMD5(file + ".stm"));                   
+                    if (!IsCreationMode) // ignore *.stm files if in creation mode.
+                    {
+                        //File.WriteAllText(file + ".stm", "purpose=\"copy\"");
+                        //File.WriteAllText(file + ".md5", GenerateMD5(file));
+                        //File.WriteAllText(file + ".stm.md5", GenerateMD5(file + ".stm"));
+                    }
                 }
                 i.Update = false;
                 i.Ready = true;
@@ -627,6 +634,7 @@ namespace MediaNavIGO
             if (File.Exists(ini))
             {
                 IsMNV3 = false;
+                IsCreationMode = false;
                 long freesize = 0L;
                 foreach (var l in File.ReadAllLines(ini))
                 {
@@ -686,6 +694,7 @@ namespace MediaNavIGO
             else
             {
                 deviceInfos.Add("mode", "create");
+                IsCreationMode = true;
             }
             fastObjectListViewDevice.SetObjects(deviceInfos);
             UpdateStatus();

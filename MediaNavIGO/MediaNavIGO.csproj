@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <Version>1.0.0.0</Version>
+    <Version>1.0.0.1</Version>
     <Copyright>Copyright ©  2016-2021</Copyright>
     <Product>MediaNavIGO</Product>
     <Company>RocketBot</Company>
@@ -15,6 +15,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <PackageProjectUrl>https://github.com/Furtif/MediaNavIGO</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
