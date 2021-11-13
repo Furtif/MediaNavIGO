@@ -703,7 +703,7 @@ namespace MediaNavIGO
                         foreach (DriveInfo d in allDrives)
                         {
                             if (d.IsReady == true && d.DriveType == DriveType.Removable && item.FullPath.Contains(d.Name))
-                            { 
+                            {
                                 //Console Mode:
                                 //Console.WriteLine("Drive {0}", d.Name);
                                 //Console.WriteLine("  Drive type: {0}", d.DriveType);
@@ -722,6 +722,7 @@ namespace MediaNavIGO
                                 //var t = File.ReadAllText(item.FullPath);
                                 //var i = d.Name;                      
                                 //MessageBox.Show(string.Format("Drive info {0}\nEncrypted: {1}\nDecrypt: {2}", i, t, Decrypt(t)));
+                                buttonGenMicomInis.Enabled = true;
                                 break;
                             }
                         }
@@ -809,6 +810,16 @@ namespace MediaNavIGO
             textBoxLocal.Text = config.LOCALPath;
             fastObjectListViewLocal.SetObjects(listLOCAL);
             UpdateStatus();
+        }
+
+        private void ButtonGenMicomInis_Click(object sender, EventArgs e)
+        {
+            if (config.USBPath.EndsWith(@":\"))
+            {
+                File.WriteAllText(config.USBPath + @"\mcmtest_activate.ini", null);
+                File.WriteAllText(config.USBPath + @"\mcmtest_activate_4medianav.ini", null);
+                MessageBox.Show("Created files for micom test both versions MediaNav1,2,3:\n" + config.USBPath + @"\mcmtest_activate.ini" + "\n" + config.USBPath + @"\mcmtest_activate_4medianav.ini", "Micom enable mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /*

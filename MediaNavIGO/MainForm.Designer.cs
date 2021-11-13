@@ -76,6 +76,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxUSB = new System.Windows.Forms.TextBox();
             this.FolderBrowserDialogBoth = new System.Windows.Forms.FolderBrowserDialog();
+            this.buttonGenMicomInis = new System.Windows.Forms.Button();
             this.ContextMenuStripUSB.SuspendLayout();
             this.StatusStripStats.SuspendLayout();
             this.ContextMenuStripLocal.SuspendLayout();
@@ -87,7 +88,6 @@
             this.tabControlMain.SuspendLayout();
             this.tabPageConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).BeginInit();
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.SuspendLayout();
             // 
             // ContextMenuStripUSB
@@ -403,6 +403,7 @@
             // 
             // tabPageConfig
             // 
+            this.tabPageConfig.Controls.Add(this.buttonGenMicomInis);
             this.tabPageConfig.Controls.Add(this.progressBarUpdate);
             this.tabPageConfig.Controls.Add(this.buttonStartUpdate);
             this.tabPageConfig.Controls.Add(this.checkBoxOnlyExists);
@@ -537,6 +538,17 @@
             this.textBoxUSB.Size = new System.Drawing.Size(371, 27);
             this.textBoxUSB.TabIndex = 0;
             // 
+            // buttonGenMicomInis
+            // 
+            this.buttonGenMicomInis.Enabled = false;
+            this.buttonGenMicomInis.Location = new System.Drawing.Point(345, 66);
+            this.buttonGenMicomInis.Name = "buttonGenMicomInis";
+            this.buttonGenMicomInis.Size = new System.Drawing.Size(183, 29);
+            this.buttonGenMicomInis.TabIndex = 11;
+            this.buttonGenMicomInis.Text = "Generates Micom ini\'s";
+            this.buttonGenMicomInis.UseVisualStyleBackColor = true;
+            this.buttonGenMicomInis.Click += new System.EventHandler(this.ButtonGenMicomInis_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -550,6 +562,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MediaNavIGO";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ContextMenuStripUSB.ResumeLayout(false);
             this.StatusStripStats.ResumeLayout(false);
@@ -617,5 +630,6 @@
         private ToolStripProgressBar toolStripProgressBarUpdate;
         private ToolStripStatusLabel toolStripStatusLabelReadyTxt;
         private ToolStripStatusLabel toolStripStatusLabelReady;
+        private Button buttonGenMicomInis;
     }
 }
