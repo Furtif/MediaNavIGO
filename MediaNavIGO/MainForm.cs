@@ -197,6 +197,7 @@ namespace MediaNavIGO
             toolStripProgressBarUpdate.Maximum = mylist.Count;
             foreach (var i in mylist)
             {
+                var md5 = GenerateMD5(File.ReadAllBytes(i.FullPath));
                 if (i.InUSB)
                 {
                     var c = listUSB.Find(x => x.RealName.ToLower() == i.RealName.ToLower());
@@ -205,7 +206,6 @@ namespace MediaNavIGO
                         try
                         {
                             var contstm = File.ReadAllText(c.FullPath);
-                            var md5 = GenerateMD5(File.ReadAllBytes(i.FullPath));
                             bool upt = false;
                             foreach (var s in File.ReadAllLines(c.FullPath))
                             {
@@ -240,7 +240,7 @@ namespace MediaNavIGO
                                 }
                                 if (!IsCreationMode) // ignore *.stm files if in creation mode.
                                 {
-                                    File.WriteAllText(c.FullPath, contstm);
+                                    File.WriteAllText(c.FullPath, contstm);//, Encoding.Unicode);
                                     //File.WriteAllText(c.FullPath + ".md5", md5);
                                 }
                             }
@@ -263,46 +263,46 @@ namespace MediaNavIGO
                             p += @"\navisync";
                             break;
                         case FolderType.LICENSE:
-                            p += @"\license\";
+                            p += @"\navisync\license\";
                             break;
                         case FolderType.UX:
-                            p += @"\ux\";
+                            p += @"\navisync\ux\";
                             break;
                         case FolderType.CONTENT:
-                            p += @"\content\";
+                            p += @"\navisync\content\";
                             break;
                         case FolderType.GLOBAL_CFG:
-                            p += @"\content\global_cfg\";
+                            p += @"\navisync\content\global_cfg\";
                             break;
                         case FolderType.MAP:
-                            p += @"\content\map\";
+                            p += @"\navisync\content\map\";
                             break;
                         case FolderType.POI:
-                            p += @"\content\poi\";
+                            p += @"\navisync\content\poi\";
                             break;
                         case FolderType.SPEEDCAM:
-                            p += @"\content\speedcam\";
+                            p += @"\navisync\content\speedcam\";
                             break;
                         case FolderType.BUILDING:
-                            p += @"\content\building\";
+                            p += @"\navisync\content\building\";
                             break;
                         case FolderType.PHONEME:
-                            p += @"\content\phoneme\";
+                            p += @"\navisync\content\phoneme\";
                             break;
                         case FolderType.TMC:
-                            p += @"\content\tmc\";
+                            p += @"\navisync\content\tmc\";
                             break;
                         case FolderType.VOICE:
-                            p += @"\content\voice\";
+                            p += @"\navisync\content\voice\";
                             break;
                         case FolderType.LANG:
-                            p += @"\content\lang\";
+                            p += @"\navisync\content\lang\";
                             break;
                         case FolderType.USERDATA:
-                            p += @"\content\userdata\";
+                            p += @"\navisync\content\userdata\";
                             break;
                         case FolderType.SAVE:
-                            p += @"\save\";
+                            p += @"\navisync\save\";
                             break;
                     }
                     if (!Directory.Exists(p))
@@ -313,7 +313,19 @@ namespace MediaNavIGO
                     File.Copy(i.FullPath, file, true);
                     if (!IsCreationMode) // ignore *.stm files if in creation mode.
                     {
-                        //File.WriteAllText(file + ".stm", "purpose=\"copy\"");
+                        var sb = new StringBuilder();
+                        DateTime myDate1 = new DateTime(1970, 1, 9, 0, 0, 00);
+                        DateTime myDate2 = DateTime.Now;
+                        TimeSpan myDateResult;
+                        myDateResult = myDate2 - myDate1;
+                        int seconds = (int)myDateResult.TotalSeconds;
+                        sb.AppendLine("purpose = shadow");
+                        sb.AppendLine("size = " + new FileInfo(i.FullPath).Length.ToString());
+                        sb.AppendLine("content_id = ????????");
+                        sb.AppendLine("header_id = ????????");
+                        sb.AppendLine("timestamp = " + seconds.ToString());
+                        sb.AppendLine("md5 = " + md5);
+                        File.WriteAllText(file + ".stm", sb.ToString());
                         //File.WriteAllText(file + ".md5", GenerateMD5(file));
                         //File.WriteAllText(file + ".stm.md5", GenerateMD5(file + ".stm"));
                     }
