@@ -643,6 +643,13 @@ namespace MediaNavIGO
                     textBoxUSB.Text = config.USBPath;
                     fastObjectListViewUSB.SetObjects(listUSB);
                 }
+                else
+                {
+                    deviceInfos.Clear();
+                    deviceInfos.Add("[?]_init_mode", @"select folders first...");
+                    fastObjectListViewDevice.SetObjects(deviceInfos);
+                    return;
+                }
             }
             deviceInfos.Clear();
             string ini = string.Empty;
