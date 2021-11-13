@@ -816,9 +816,9 @@ namespace MediaNavIGO
         {
             if (config.USBPath.EndsWith(@":\"))
             {
-                File.WriteAllText(config.USBPath + @"\mcmtest_activate.ini", null);
-                File.WriteAllText(config.USBPath + @"\mcmtest_activate_4medianav.ini", null);
-                MessageBox.Show("Created files for micom test both versions MediaNav1,2,3:\n" + config.USBPath + @"\mcmtest_activate.ini" + "\n" + config.USBPath + @"\mcmtest_activate_4medianav.ini", "Micom enable mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                File.WriteAllText(config.USBPath + "mcmtest_activate.ini", null);
+                File.WriteAllText(config.USBPath + "mcmtest_activate_4medianav.ini", null);
+                MessageBox.Show("Created files for micom test both versions MediaNav1,2,3:\n" + config.USBPath + "mcmtest_activate.ini\n" + config.USBPath + "mcmtest_activate_4medianav.ini", "Micom enable mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
