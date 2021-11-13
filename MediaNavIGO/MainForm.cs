@@ -702,40 +702,34 @@ namespace MediaNavIGO
                     }
                 }
 
-                foreach (var item in listUSB)
+                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                foreach (DriveInfo d in allDrives)
                 {
-                    if (item.FullPath.ToLower().EndsWith(@"\update_checksum.md5"))
+                    if (d.IsReady == true && d.DriveType == DriveType.Removable && config.USBPath.EndsWith(d.Name))
                     {
-                        DriveInfo[] allDrives = DriveInfo.GetDrives();
-
-                        foreach (DriveInfo d in allDrives)
-                        {
-                            if (d.IsReady == true && d.DriveType == DriveType.Removable && item.FullPath.Contains(d.Name))
-                            {
-                                //Console Mode:
-                                //Console.WriteLine("Drive {0}", d.Name);
-                                //Console.WriteLine("  Drive type: {0}", d.DriveType);
-                                //Console.WriteLine("  Volume label: {0}", d.VolumeLabel);
-                                //Console.WriteLine("  File system: {0}", d.DriveFormat);
-                                //Console.WriteLine(
-                                //    "  Available space to current user:{0, 15} bytes",
-                                //    d.AvailableFreeSpace);
-                                //Console.WriteLine(
-                                //    "  Total available space:          {0, 15} bytes",
-                                //    d.TotalFreeSpace);
-                                //Console.WriteLine(
-                                //    "  Total size of drive:            {0, 15} bytes ",
-                                //    d.TotalSize);
-                                //MessageboxInfos:
-                                //var t = File.ReadAllText(item.FullPath);
-                                //var i = d.Name;                      
-                                //MessageBox.Show(string.Format("Drive info {0}\nEncrypted: {1}\nDecrypt: {2}", i, t, Decrypt(t)));
-                                buttonGenMicomInis.Enabled = true;
-                                break;
-                            }
-                        }
+                        //Console Mode:
+                        //Console.WriteLine("Drive {0}", d.Name);
+                        //Console.WriteLine("  Drive type: {0}", d.DriveType);
+                        //Console.WriteLine("  Volume label: {0}", d.VolumeLabel);
+                        //Console.WriteLine("  File system: {0}", d.DriveFormat);
+                        //Console.WriteLine(
+                        //    "  Available space to current user:{0, 15} bytes",
+                        //    d.AvailableFreeSpace);
+                        //Console.WriteLine(
+                        //    "  Total available space:          {0, 15} bytes",
+                        //    d.TotalFreeSpace);
+                        //Console.WriteLine(
+                        //    "  Total size of drive:            {0, 15} bytes ",
+                        //    d.TotalSize);
+                        //MessageboxInfos:
+                        //var t = File.ReadAllText(item.FullPath);
+                        //var i = d.Name;                      
+                        //MessageBox.Show(string.Format("Drive info {0}\nEncrypted: {1}\nDecrypt: {2}", i, t, Decrypt(t)));
+                        buttonGenMicomInis.Enabled = true;
+                        break;
                     }
                 }
+
                 foreach (var item in listUSB)
                 {
                     if (item.FullPath.ToLower().EndsWith(@"\brand.txt"))
@@ -827,6 +821,7 @@ namespace MediaNavIGO
                 File.WriteAllText(config.USBPath + "mcmtest_activate.ini", null);
                 File.WriteAllText(config.USBPath + "mcmtest_activate_4medianav.ini", null);
                 MessageBox.Show("Created files for micom test both versions MediaNav1,2,3:\n" + config.USBPath + "mcmtest_activate.ini\n" + config.USBPath + "mcmtest_activate_4medianav.ini", "Micom enable mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadUSBFolder();
             }
         }
 
