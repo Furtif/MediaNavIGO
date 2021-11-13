@@ -604,7 +604,7 @@ namespace MediaNavIGO
                 List<ItemSetting> files = new();
                 foreach (var item in enumerable)
                 {
-                    if (item.Contains(@"\."))
+                    if (item.Contains(@"\.") || item.ToLower().EndsWith(@"\wpsettings.dat") || item.ToLower().EndsWith(@"\indexervolumeguid"))
                         continue;
                     var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
                     files.Add(_item);
@@ -622,7 +622,7 @@ namespace MediaNavIGO
                     List<ItemSetting> files = new();
                     foreach (var item in enumerable)
                     {
-                        if (item.Contains(@"\."))
+                        if (item.Contains(@"\.") || item.ToLower().EndsWith(@"\wpsettings.dat") || item.ToLower().EndsWith(@"\indexervolumeguid"))
                             continue;
                         var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
                         files.Add(_item);
