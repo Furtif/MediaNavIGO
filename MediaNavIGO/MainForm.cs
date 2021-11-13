@@ -769,10 +769,8 @@ namespace MediaNavIGO
                 List<ItemSetting> files = new();
                 foreach (var item in enumerable)
                 {
-
                     if (item.Contains(@"\."))
                         continue;
-
                     if (!IsValideFile(item))
                     {
                         continue;
