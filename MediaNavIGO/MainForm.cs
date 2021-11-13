@@ -609,6 +609,7 @@ namespace MediaNavIGO
             //GetHasList();
             listUSB.Clear();
             textBoxUSB.Text = null;
+            buttonGenMicomInis.Enabled = false;
             if (Directory.Exists(config.USBPath))
             {
                 IEnumerable<string> enumerable = Directory.EnumerateFiles(config.USBPath, "*.*", SearchOption.AllDirectories);
