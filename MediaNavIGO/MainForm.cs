@@ -5,7 +5,6 @@ using System.Diagnostics;
 using BrightIdeasSoftware;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace MediaNavIGO
 {
@@ -800,6 +799,7 @@ namespace MediaNavIGO
             UpdateStatus();
         }
 
+        /*
         public static string Decrypt(string cipherText)
         {
             var data = Encoding.UTF8.GetBytes(cipherText);
@@ -816,5 +816,6 @@ namespace MediaNavIGO
                 }
             }
         }
+        */
     }
 }
