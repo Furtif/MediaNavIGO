@@ -64,6 +64,7 @@
             this.pictureBoxAbout = new System.Windows.Forms.PictureBox();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
+            this.buttonGenMicomInis = new System.Windows.Forms.Button();
             this.progressBarUpdate = new System.Windows.Forms.ProgressBar();
             this.buttonStartUpdate = new System.Windows.Forms.Button();
             this.checkBoxOnlyExists = new System.Windows.Forms.CheckBox();
@@ -76,7 +77,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxUSB = new System.Windows.Forms.TextBox();
             this.FolderBrowserDialogBoth = new System.Windows.Forms.FolderBrowserDialog();
-            this.buttonGenMicomInis = new System.Windows.Forms.Button();
             this.ContextMenuStripUSB.SuspendLayout();
             this.StatusStripStats.SuspendLayout();
             this.ContextMenuStripLocal.SuspendLayout();
@@ -424,11 +424,23 @@
             this.tabPageConfig.Text = "Main [config/commands]";
             this.tabPageConfig.UseVisualStyleBackColor = true;
             // 
+            // buttonGenMicomInis
+            // 
+            this.buttonGenMicomInis.Enabled = false;
+            this.buttonGenMicomInis.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonGenMicomInis.Location = new System.Drawing.Point(534, 449);
+            this.buttonGenMicomInis.Name = "buttonGenMicomInis";
+            this.buttonGenMicomInis.Size = new System.Drawing.Size(112, 29);
+            this.buttonGenMicomInis.TabIndex = 11;
+            this.buttonGenMicomInis.Text = "Micom ini\'s";
+            this.buttonGenMicomInis.UseVisualStyleBackColor = true;
+            this.buttonGenMicomInis.Click += new System.EventHandler(this.ButtonGenMicomInis_Click);
+            // 
             // progressBarUpdate
             // 
-            this.progressBarUpdate.Location = new System.Drawing.Point(157, 450);
+            this.progressBarUpdate.Location = new System.Drawing.Point(145, 450);
             this.progressBarUpdate.Name = "progressBarUpdate";
-            this.progressBarUpdate.Size = new System.Drawing.Size(489, 27);
+            this.progressBarUpdate.Size = new System.Drawing.Size(383, 27);
             this.progressBarUpdate.TabIndex = 10;
             // 
             // buttonStartUpdate
@@ -436,7 +448,7 @@
             this.buttonStartUpdate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonStartUpdate.Location = new System.Drawing.Point(8, 450);
             this.buttonStartUpdate.Name = "buttonStartUpdate";
-            this.buttonStartUpdate.Size = new System.Drawing.Size(143, 27);
+            this.buttonStartUpdate.Size = new System.Drawing.Size(131, 27);
             this.buttonStartUpdate.TabIndex = 9;
             this.buttonStartUpdate.Text = "Start update";
             this.buttonStartUpdate.UseVisualStyleBackColor = true;
@@ -537,17 +549,6 @@
             this.textBoxUSB.Name = "textBoxUSB";
             this.textBoxUSB.Size = new System.Drawing.Size(371, 27);
             this.textBoxUSB.TabIndex = 0;
-            // 
-            // buttonGenMicomInis
-            // 
-            this.buttonGenMicomInis.Enabled = false;
-            this.buttonGenMicomInis.Location = new System.Drawing.Point(345, 66);
-            this.buttonGenMicomInis.Name = "buttonGenMicomInis";
-            this.buttonGenMicomInis.Size = new System.Drawing.Size(183, 29);
-            this.buttonGenMicomInis.TabIndex = 11;
-            this.buttonGenMicomInis.Text = "Generates Micom ini\'s";
-            this.buttonGenMicomInis.UseVisualStyleBackColor = true;
-            this.buttonGenMicomInis.Click += new System.EventHandler(this.ButtonGenMicomInis_Click);
             // 
             // MainForm
             // 
