@@ -258,7 +258,7 @@ namespace MediaNavIGO
                     switch (i.FolderType)
                     {
                         case FolderType.ROOT:
-                            p += @"\";
+                            //p += @"\";
                             break;
                         case FolderType.NAVI_ROOT:
                             p += @"\navisync";
@@ -559,12 +559,13 @@ namespace MediaNavIGO
 
         private static string GenerateMD5(byte[] content)
         {
-            var md5 = MD5.Create();            
+            var md5 = MD5.Create();
             // Convert the byte array to hexadecimal string
+            byte[] hashBytes = md5.ComputeHash(content);
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < content.Length; i++)
+            for (int i = 0; i < hashBytes.Length; i++)
             {
-                sb.Append(content[i].ToString("X2"));
+                sb.Append(hashBytes[i].ToString("X2"));
             }
             return sb.ToString();
         }
