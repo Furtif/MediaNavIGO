@@ -5,6 +5,7 @@ using System.Diagnostics;
 using BrightIdeasSoftware;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
 namespace MediaNavIGO
 {
@@ -205,7 +206,7 @@ namespace MediaNavIGO
                         try
                         {
                             var contstm = File.ReadAllText(c.FullPath);
-                            var md5 = GenerateMD5(i.FullPath);
+                            var md5 = GenerateMD5(File.ReadAllBytes(i.FullPath));
                             bool upt = false;
                             foreach (var s in File.ReadAllLines(c.FullPath))
                             {
@@ -241,7 +242,7 @@ namespace MediaNavIGO
                                 if (!IsCreationMode) // ignore *.stm files if in creation mode.
                                 {
                                     File.WriteAllText(c.FullPath, contstm);
-                                    //File.WriteAllText(c.FullPath + ".md5", GenerateMD5(c.FullPath));
+                                    //File.WriteAllText(c.FullPath + ".md5", md5);
                                 }
                             }
                         }
@@ -256,8 +257,11 @@ namespace MediaNavIGO
                     var p = config.USBPath;
                     switch (i.FolderType)
                     {
-                        case FolderType.NAVI_ROOT:
+                        case FolderType.ROOT:
                             p += @"\";
+                            break;
+                        case FolderType.NAVI_ROOT:
+                            p += @"\navisync";
                             break;
                         case FolderType.LICENSE:
                             p += @"\license\";
@@ -482,6 +486,8 @@ namespace MediaNavIGO
                     return Color.Gray;
                 case FolderType.NAVI_ROOT:
                     return Color.Red;
+                case FolderType.ROOT:
+                    return Color.LimeGreen;
                 default:
                     return Color.Red;
             }
@@ -517,10 +523,10 @@ namespace MediaNavIGO
                 return FolderType.CONTENT;
             else if (item.ToLower().Contains(@"\save\"))
                 return FolderType.SAVE;
-            else if (item.ToLower().Contains(@"navisync"))
+            else if (item.ToLower().Contains(@"\navisync"))
                 return FolderType.NAVI_ROOT;
-            else if (item.ToLower().Contains('\\'))
-                return FolderType.NAVI_ROOT;
+            else if (item.ToLower().Contains(@":\"))
+                return FolderType.ROOT;
             else
                 return FolderType.NONE;
         }
@@ -551,15 +557,14 @@ namespace MediaNavIGO
             checkBoxOnlyExists.Checked = config.OnlyPresentInUsb;
         }
 
-        private static string GenerateMD5(string file)
+        private static string GenerateMD5(byte[] content)
         {
-            var md5 = MD5.Create();
-            byte[] hashBytes = md5.ComputeHash(File.ReadAllBytes(file));
+            var md5 = MD5.Create();            
             // Convert the byte array to hexadecimal string
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hashBytes.Length; i++)
+            for (int i = 0; i < content.Length; i++)
             {
-                sb.Append(hashBytes[i].ToString("X2"));
+                sb.Append(content[i].ToString("X2"));
             }
             return sb.ToString();
         }
@@ -598,6 +603,8 @@ namespace MediaNavIGO
                 List<ItemSetting> files = new();
                 foreach (var item in enumerable)
                 {
+                    if (item.Contains(@"\."))
+                        continue;
                     var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
                     files.Add(_item);
                 }
@@ -614,6 +621,8 @@ namespace MediaNavIGO
                     List<ItemSetting> files = new();
                     foreach (var item in enumerable)
                     {
+                        if (item.Contains(@"\."))
+                            continue;
                         var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
                         files.Add(_item);
                     }
@@ -630,7 +639,7 @@ namespace MediaNavIGO
                 {
                     ini = item.FullPath;
                 }
-            }
+            }            
             if (File.Exists(ini))
             {
                 IsMNV3 = false;
@@ -669,6 +678,40 @@ namespace MediaNavIGO
                             }
                             else
                                 deviceInfos.Add("device_version", "Media Nav [??] [??] (??)");
+                        }
+                    }
+                }
+
+                foreach (var item in listUSB)
+                {
+                    if (item.FullPath.ToLower().EndsWith(@"\update_checksum.md5"))
+                    {
+                        DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+                        foreach (DriveInfo d in allDrives)
+                        {
+                            if (d.IsReady == true && d.DriveType == DriveType.Removable && item.FullPath.Contains(d.Name))
+                            { 
+                                //Console Mode:
+                                //Console.WriteLine("Drive {0}", d.Name);
+                                //Console.WriteLine("  Drive type: {0}", d.DriveType);
+                                //Console.WriteLine("  Volume label: {0}", d.VolumeLabel);
+                                //Console.WriteLine("  File system: {0}", d.DriveFormat);
+                                //Console.WriteLine(
+                                //    "  Available space to current user:{0, 15} bytes",
+                                //    d.AvailableFreeSpace);
+                                //Console.WriteLine(
+                                //    "  Total available space:          {0, 15} bytes",
+                                //    d.TotalFreeSpace);
+                                //Console.WriteLine(
+                                //    "  Total size of drive:            {0, 15} bytes ",
+                                //    d.TotalSize);
+                                //MessageboxInfos:
+                                //var t = File.ReadAllText(item.FullPath);
+                                //var i = d.Name;                      
+                                //MessageBox.Show(string.Format("Drive info {0}\nEncrypted: {1}\nDecrypt: {2}", i, t, Decrypt(t)));
+                                break;
+                            }
                         }
                     }
                 }
@@ -711,6 +754,10 @@ namespace MediaNavIGO
                 List<ItemSetting> files = new();
                 foreach (var item in enumerable)
                 {
+
+                    if (item.Contains(@"\."))
+                        continue;
+
                     if (!IsValideFile(item))
                     {
                         continue;
@@ -750,6 +797,23 @@ namespace MediaNavIGO
             textBoxLocal.Text = config.LOCALPath;
             fastObjectListViewLocal.SetObjects(listLOCAL);
             UpdateStatus();
+        }
+
+        public static string Decrypt(string cipherText)
+        {
+            var data = Encoding.UTF8.GetBytes(cipherText);
+
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                var keys = md5.ComputeHash(Encoding.UTF8.GetBytes(cipherText));
+                using (var tripDes = new TripleDESCryptoServiceProvider { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+                {
+                    var transform = tripDes.CreateEncryptor();
+                    var results = transform.TransformFinalBlock(data, 0, data.Length);
+                    //return Convert.ToBase64String(results, 0, results.Length);
+                   return Encoding.UTF8.GetString(results);
+                }
+            }
         }
     }
 }

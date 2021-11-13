@@ -9,6 +9,7 @@ namespace MediaNavIGO.Enums
     public enum FolderType
     {
         NONE,
+        ROOT,
         NAVI_ROOT,
         LICENSE,
         UX,
