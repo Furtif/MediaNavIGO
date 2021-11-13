@@ -27,7 +27,7 @@ namespace MediaNavIGO
         private readonly List<string> FILTER_OF_FOLDER_CONTENT_PHONEME = new() { ".ph" };
         private readonly List<string> FILTER_OF_FOLDER_LICENSE = new() { ".lic", ".lyc", ".nng" };
         private readonly List<string> FILTER_OF_FOLDER_CONTENT = new() { ".pinfo" };
-        private readonly List<string> FILTER_OF_FOLDER_NAVI_ROOT = new() { "nngnavi", ".zip" };
+        private readonly List<string> FILTER_OF_FOLDER_NAVI_ROOT = new() { "nngnavi", "nngnavi.exe", ".zip" };
         private readonly List<string> FILTER_OF_FOLDER_UX = new() { ".zip" };
         // ALL loaded in init's.
         private readonly List<string> ALL_FILTERS = new();
@@ -321,12 +321,12 @@ namespace MediaNavIGO
                         int seconds = (int)myDateResult.TotalSeconds;
                         sb.AppendLine("purpose = shadow");
                         sb.AppendLine("size = " + new FileInfo(i.FullPath).Length.ToString());
-                        sb.AppendLine("content_id = ????????");
-                        sb.AppendLine("header_id = ????????");
+                        sb.AppendLine("content_id = ????????"); //TODO: ///
+                        sb.AppendLine("header_id = ????????"); //TODO: ///
                         sb.AppendLine("timestamp = " + seconds.ToString());
                         sb.AppendLine("md5 = " + md5);
                         File.WriteAllText(file + ".stm", sb.ToString());
-                        //File.WriteAllText(file + ".md5", GenerateMD5(file));
+                        //File.WriteAllText(file + ".md5", md5);
                         //File.WriteAllText(file + ".stm.md5", GenerateMD5(file + ".stm"));
                     }
                 }
