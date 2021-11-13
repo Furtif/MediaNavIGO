@@ -36,7 +36,7 @@ namespace MediaNavIGO
         private Config config = new();
         private bool IsMNV3 = false;
         private bool IsCreationMode = false;
-        private string configfile = "MediaNavIGO.json";
+        private readonly string configfile = "MediaNavIGO.json";
 
         public MainForm()
         {
