@@ -14,6 +14,8 @@ namespace MediaNavIGO
         private readonly List<ItemSetting> listLOCAL = new();
         private readonly List<ItemSetting> listReady = new();
         private readonly Dictionary<string, string> deviceInfos = new();
+        private Color origusbtextback;
+        private Color origusbtextfore;
         //filters of emuns FolderType
         private readonly List<string> FILTER_OF_FOLDER_CONTENT_MAP = new() { ".fbl", ".fda", ".fpa", ".ftr", ".fjv", ".hnr", ".fsp", ".fjw" };
         private readonly List<string> FILTER_OF_FOLDER_CONTENT_POI = new() { ".poi" };
@@ -69,6 +71,8 @@ namespace MediaNavIGO
             ALL_FILTERS.AddRange(FILTER_OF_FOLDER_NAVI_ROOT);
             ALL_FILTERS.AddRange(FILTER_OF_FOLDER_UX);
             //
+            origusbtextback = textBoxUSB.BackColor;
+            origusbtextfore = textBoxUSB.ForeColor;
             deviceInfos.Add("[?]_init_mode", @"select folders first...");
             fastObjectListViewDevice.SetObjects(deviceInfos);
             LoadConfig();
@@ -610,6 +614,9 @@ namespace MediaNavIGO
             listUSB.Clear();
             textBoxUSB.Text = null;
             buttonGenMicomInis.Enabled = false;
+            textBoxUSB.BackColor = origusbtextback;
+            textBoxUSB.ForeColor = origusbtextfore;
+
             if (Directory.Exists(config.USBPath))
             {
                 IEnumerable<string> enumerable = Directory.EnumerateFiles(config.USBPath, "*.*", SearchOption.AllDirectories);
@@ -745,6 +752,9 @@ namespace MediaNavIGO
                         //var i = d.Name;                      
                         //MessageBox.Show(string.Format("Drive info {0}\nEncrypted: {1}\nDecrypt: {2}", i, t, Decrypt(t)));
                         buttonGenMicomInis.Enabled = true;
+                        textBoxUSB.BackColor = Color.Blue;
+                        textBoxUSB.ForeColor = Color.White;
+                        textBoxUSB.Text = string.Format("[{0}, {1}, {2}, Usable Size: {3}]", d.Name, d.DriveType, d.VolumeLabel, SizeUtils.ToSize(freesize, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString());
                         break;
                     }
                 }
