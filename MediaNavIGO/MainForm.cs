@@ -616,6 +616,25 @@ namespace MediaNavIGO
                 List<ItemSetting> files = new();
                 foreach (var item in enumerable)
                 {
+                    if (item.EndsWith(".lyc"))
+                    {
+                        if (!enumerable.Where(x => x == item + ".md5").Any())
+                        {
+                            //MessageBox.Show(item + " this mis md5");
+                            //File.WriteAllText(item + ".md5", GenerateMD5(File.ReadAllBytes(item)));
+                            //var mismd5 = new ItemSetting(Path.GetFileName(item).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
+                            //files.Add(mismd5);
+
+                        }
+                        if (!enumerable.Where(x => x == item + ".stm").Any())
+                        {
+                            //MessageBox.Show(item + " this mis stm");
+                            //File.WriteAllText(item + ".stm", "purpose=\"copy\"");
+                            //var missmt = new ItemSetting(Path.GetFileName(item).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
+                            //files.Add(missmt);
+                        }
+                    }
+
                     if (item.Contains(@"\.") || item.ToLower().EndsWith(@"\wpsettings.dat") || item.ToLower().EndsWith(@"\indexervolumeguid"))
                         continue;
                     var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
