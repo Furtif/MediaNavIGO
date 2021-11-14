@@ -610,56 +610,40 @@ namespace MediaNavIGO
 
         private void LoadUSBFolder()
         {
-            //GetHasList();
-            listUSB.Clear();
-            textBoxUSB.Text = null;
-            buttonGenMicomInis.Enabled = false;
-            textBoxUSB.BackColor = origusbtextback;
-            textBoxUSB.ForeColor = origusbtextfore;
-
-            if (Directory.Exists(config.USBPath))
+            try
             {
-                IEnumerable<string> enumerable = Directory.EnumerateFiles(config.USBPath, "*.*", SearchOption.AllDirectories);
-                List<ItemSetting> files = new();
-                foreach (var item in enumerable)
-                {
-                    if (item.EndsWith(".lyc"))
-                    {
-                        if (!enumerable.Where(x => x == item + ".md5").Any())
-                        {
-                            //MessageBox.Show(item + " this mis md5");
-                            //File.WriteAllText(item + ".md5", GenerateMD5(File.ReadAllBytes(item)));
-                            //var mismd5 = new ItemSetting(Path.GetFileName(item).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
-                            //files.Add(mismd5);
+                //GetHasList();
+                listUSB.Clear();
+                textBoxUSB.Text = null;
+                buttonGenMicomInis.Enabled = false;
+                textBoxUSB.BackColor = origusbtextback;
+                textBoxUSB.ForeColor = origusbtextfore;
 
-                        }
-                        if (!enumerable.Where(x => x == item + ".stm").Any())
-                        {
-                            //MessageBox.Show(item + " this mis stm");
-                            //File.WriteAllText(item + ".stm", "purpose=\"copy\"");
-                            //var missmt = new ItemSetting(Path.GetFileName(item).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
-                            //files.Add(missmt);
-                        }
-                    }
-
-                    if (item.Contains(@"\.") || item.ToLower().EndsWith(@"\wpsettings.dat") || item.ToLower().EndsWith(@"\indexervolumeguid"))
-                        continue;
-                    var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
-                    files.Add(_item);
-                }
-                listUSB.AddRange(files.OrderBy(x => x.FolderType));
-                textBoxUSB.Text = config.USBPath;
-                fastObjectListViewUSB.SetObjects(listUSB);
-            }
-            else
-            {
-                if (FolderBrowserDialogBoth.ShowDialog() == DialogResult.OK)
+                if (Directory.Exists(config.USBPath))
                 {
-                    config.USBPath = FolderBrowserDialogBoth.SelectedPath;
                     IEnumerable<string> enumerable = Directory.EnumerateFiles(config.USBPath, "*.*", SearchOption.AllDirectories);
                     List<ItemSetting> files = new();
                     foreach (var item in enumerable)
                     {
+                        if (item.EndsWith(".lyc"))
+                        {
+                            if (!enumerable.Where(x => x == item + ".md5").Any())
+                            {
+                                //MessageBox.Show(item + " this mis md5");
+                                //File.WriteAllText(item + ".md5", GenerateMD5(File.ReadAllBytes(item)));
+                                //var mismd5 = new ItemSetting(Path.GetFileName(item).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
+                                //files.Add(mismd5);
+
+                            }
+                            if (!enumerable.Where(x => x == item + ".stm").Any())
+                            {
+                                //MessageBox.Show(item + " this mis stm");
+                                //File.WriteAllText(item + ".stm", "purpose=\"copy\"");
+                                //var missmt = new ItemSetting(Path.GetFileName(item).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
+                                //files.Add(missmt);
+                            }
+                        }
+
                         if (item.Contains(@"\.") || item.ToLower().EndsWith(@"\wpsettings.dat") || item.ToLower().EndsWith(@"\indexervolumeguid"))
                             continue;
                         var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
@@ -671,120 +655,150 @@ namespace MediaNavIGO
                 }
                 else
                 {
-                    deviceInfos.Clear();
-                    deviceInfos.Add("[?]_init_mode", @"select folders first...");
-                    fastObjectListViewDevice.SetObjects(deviceInfos);
-                    return;
-                }
-            }
-            deviceInfos.Clear();
-            string ini = string.Empty;
-            foreach (var item in listUSB)
-            {
-                if (item.FullPath.ToLower().EndsWith(@"\device_status.ini"))
-                {
-                    ini = item.FullPath;
-                }
-            }            
-            if (File.Exists(ini))
-            {
-                IsMNV3 = false;
-                IsCreationMode = false;
-                long freesize = 0L;
-                foreach (var l in File.ReadAllLines(ini))
-                {
-                    if (l.Contains('='))
+                    if (FolderBrowserDialogBoth.ShowDialog() == DialogResult.OK)
                     {
-                        var _1 = l.Split("=")[0].Trim();
-                        var _2 = l.Split("=")[1].Trim();
-                        if (long.TryParse(_2, out long p))
+                        config.USBPath = FolderBrowserDialogBoth.SelectedPath;
+                        IEnumerable<string> enumerable = Directory.EnumerateFiles(config.USBPath, "*.*", SearchOption.AllDirectories);
+                        List<ItemSetting> files = new();
+                        foreach (var item in enumerable)
                         {
-                            if (_1 == "freesize")
-                            {
-                                freesize = p;
-                                _2 = SizeUtils.ToSize(p, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString();
-                            }
-                            if (_1 == "totalsize")
-                            {
-                                _2 = SizeUtils.ToSize(p, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString();
-                                deviceInfos.Add("usedsize", SizeUtils.ToSize(p - freesize, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString());
-                            }
+                            if (item.Contains(@"\.") || item.ToLower().EndsWith(@"\wpsettings.dat") || item.ToLower().EndsWith(@"\indexervolumeguid"))
+                                continue;
+                            var _item = new ItemSetting(Path.GetFileName(item).Replace(".stm", null).Trim(), GetFolderType(item), Path.GetFileName(item), item, false, false, false);
+                            files.Add(_item);
                         }
-                        deviceInfos.Add(_1, _2);
-                        if (int.TryParse(_2.Replace("\"", null).Replace(".", null), out int y) && _1.Equals("os_version"))
-                        {
-                            if (y >= 100 && y <= 410)
-                                deviceInfos.Add("device_version", "Media Nav [1]");
-                            else if (y >= 528 && y <= 913)
-                                deviceInfos.Add("device_version", "MediaNav Evolution [2] (2015 - mid 2018)");
-                            else if (y >= 10128)
-                            {
-                                IsMNV3 = true;
-                                deviceInfos.Add("device_version", "Media Nav Evolution [3] (LATE 2018)");
-                            }
-                            else
-                                deviceInfos.Add("device_version", "Media Nav [??] [??] (??)");
-                        }
+                        listUSB.AddRange(files.OrderBy(x => x.FolderType));
+                        textBoxUSB.Text = config.USBPath;
+                        fastObjectListViewUSB.SetObjects(listUSB);
+                    }
+                    else
+                    {
+                        deviceInfos.Clear();
+                        deviceInfos.Add("[?]_init_mode", @"select folders first...");
+                        fastObjectListViewDevice.SetObjects(deviceInfos);
+                        return;
                     }
                 }
-
-                DriveInfo[] allDrives = DriveInfo.GetDrives();
-                foreach (DriveInfo d in allDrives)
-                {
-                    if (d.IsReady == true && d.DriveType == DriveType.Removable && config.USBPath.EndsWith(d.Name))
-                    {
-                        //Console Mode:
-                        //Console.WriteLine("Drive {0}", d.Name);
-                        //Console.WriteLine("  Drive type: {0}", d.DriveType);
-                        //Console.WriteLine("  Volume label: {0}", d.VolumeLabel);
-                        //Console.WriteLine("  File system: {0}", d.DriveFormat);
-                        //Console.WriteLine(
-                        //    "  Available space to current user:{0, 15} bytes",
-                        //    d.AvailableFreeSpace);
-                        //Console.WriteLine(
-                        //    "  Total available space:          {0, 15} bytes",
-                        //    d.TotalFreeSpace);
-                        //Console.WriteLine(
-                        //    "  Total size of drive:            {0, 15} bytes ",
-                        //    d.TotalSize);
-                        //MessageboxInfos:
-                        //var t = File.ReadAllText(item.FullPath);
-                        //var i = d.Name;                      
-                        //MessageBox.Show(string.Format("Drive info {0}\nEncrypted: {1}\nDecrypt: {2}", i, t, Decrypt(t)));
-                        buttonGenMicomInis.Enabled = true;
-                        textBoxUSB.BackColor = Color.Blue;
-                        textBoxUSB.ForeColor = Color.White;
-                        textBoxUSB.Text = string.Format("[{0}, {1}, {2}, Usable Size: {3}]", d.Name, d.DriveType, d.VolumeLabel, SizeUtils.ToSize(freesize, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString());
-                        break;
-                    }
-                }
-
+                deviceInfos.Clear();
+                string ini = string.Empty;
                 foreach (var item in listUSB)
                 {
-                    if (item.FullPath.ToLower().EndsWith(@"\brand.txt"))
+                    if (item.FullPath.ToLower().EndsWith(@"\device_status.ini"))
                     {
-                        deviceInfos.Add("brand", File.ReadAllText(item.FullPath).Trim());
-                        break;
+                        ini = item.FullPath;
                     }
                 }
-                foreach (var item in listUSB)
+                if (File.Exists(ini))
                 {
-                    if (item.FullPath.ToLower().EndsWith(@"\igo_version_a.sav"))
+                    IsMNV3 = false;
+                    IsCreationMode = false;
+                    long freesize = 0L;
+                    foreach (var l in File.ReadAllLines(ini))
                     {
-                        deviceInfos.Add("igo_version", File.ReadAllText(item.FullPath).Trim());
-                        break;
+                        if (l.Contains('='))
+                        {
+                            var _1 = l.Split("=")[0].Trim();
+                            var _2 = l.Split("=")[1].Trim();
+                            if (long.TryParse(_2, out long p))
+                            {
+                                if (_1 == "freesize")
+                                {
+                                    freesize = p;
+                                    _2 = SizeUtils.ToSize(p, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString();
+                                }
+                                if (_1 == "totalsize")
+                                {
+                                    _2 = SizeUtils.ToSize(p, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString();
+                                    deviceInfos.Add("usedsize", SizeUtils.ToSize(p - freesize, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString());
+                                }
+                            }
+                            deviceInfos.Add(_1, _2);
+                            if (int.TryParse(_2.Replace("\"", null).Replace(".", null), out int y) && _1.Equals("os_version"))
+                            {
+                                if (y >= 100 && y <= 410)
+                                    deviceInfos.Add("device_version", "Media Nav [1]");
+                                else if (y >= 528 && y <= 913)
+                                    deviceInfos.Add("device_version", "MediaNav Evolution [2] (2015 - mid 2018)");
+                                else if (y >= 10128)
+                                {
+                                    IsMNV3 = true;
+                                    deviceInfos.Add("device_version", "Media Nav Evolution [3] (LATE 2018)");
+                                }
+                                else
+                                    deviceInfos.Add("device_version", "Media Nav [??] [??] (??)");
+                            }
+                        }
                     }
+
+                    DriveInfo[] allDrives = DriveInfo.GetDrives();
+                    foreach (DriveInfo d in allDrives)
+                    {
+                        if (d.IsReady == true && d.DriveType == DriveType.Removable && config.USBPath.EndsWith(d.Name))
+                        {
+                            //Console Mode:
+                            //Console.WriteLine("Drive {0}", d.Name);
+                            //Console.WriteLine("  Drive type: {0}", d.DriveType);
+                            //Console.WriteLine("  Volume label: {0}", d.VolumeLabel);
+                            //Console.WriteLine("  File system: {0}", d.DriveFormat);
+                            //Console.WriteLine(
+                            //    "  Available space to current user:{0, 15} bytes",
+                            //    d.AvailableFreeSpace);
+                            //Console.WriteLine(
+                            //    "  Total available space:          {0, 15} bytes",
+                            //    d.TotalFreeSpace);
+                            //Console.WriteLine(
+                            //    "  Total size of drive:            {0, 15} bytes ",
+                            //    d.TotalSize);
+                            //MessageboxInfos:
+                            //var t = File.ReadAllText(item.FullPath);
+                            //var i = d.Name;                      
+                            //MessageBox.Show(string.Format("Drive info {0}\nEncrypted: {1}\nDecrypt: {2}", i, t, Decrypt(t)));
+                            buttonGenMicomInis.Enabled = true;
+                            textBoxUSB.BackColor = Color.Blue;
+                            textBoxUSB.ForeColor = Color.White;
+                            textBoxUSB.Text = string.Format("[{0}, {1}, {2}, Usable Size: {3}]", d.Name, d.DriveType, d.VolumeLabel, SizeUtils.ToSize(freesize, SizeUtils.SizeUnits.MB) + " " + SizeUtils.SizeUnits.MB.ToString());
+                            break;
+                        }
+                    }
+
+                    foreach (var item in listUSB)
+                    {
+                        if (item.FullPath.ToLower().EndsWith(@"\brand.txt"))
+                        {
+                            deviceInfos.Add("brand", File.ReadAllText(item.FullPath).Trim());
+                            break;
+                        }
+                    }
+                    foreach (var item in listUSB)
+                    {
+                        if (item.FullPath.ToLower().EndsWith(@"\igo_version_a.sav"))
+                        {
+                            deviceInfos.Add("igo_version", File.ReadAllText(item.FullPath).Trim());
+                            break;
+                        }
+                    }
+                    deviceInfos.Add("android_auto", IsMNV3.ToString());
+                    deviceInfos.Add("carplay", IsMNV3.ToString());
                 }
-                deviceInfos.Add("android_auto", IsMNV3.ToString());
-                deviceInfos.Add("carplay", IsMNV3.ToString());
+                else
+                {
+                    deviceInfos.Add("mode", "create");
+                    IsCreationMode = true;
+                }
+                fastObjectListViewDevice.SetObjects(deviceInfos);
+                UpdateStatus();
             }
-            else
+            catch (UnauthorizedAccessException ex)
             {
-                deviceInfos.Add("mode", "create");
-                IsCreationMode = true;
+                listUSB.Clear();
+                textBoxUSB.BackColor = Color.Red;
+                textBoxUSB.ForeColor = Color.Yellow;
+                textBoxUSB.Text = ex.Message;
+                deviceInfos.Clear();
+                deviceInfos.Add("[?]_init_mode", @"select folders first...");
+                fastObjectListViewDevice.SetObjects(deviceInfos);
+                return;
             }
-            fastObjectListViewDevice.SetObjects(deviceInfos);
-            UpdateStatus();
         }
 
         private void LoadLocalolder()
