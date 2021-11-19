@@ -38,7 +38,6 @@ namespace MediaNavIGO
         private bool IsMNV3 = false;
         private bool IsCreationMode = false;
         private readonly string configfile = "MediaNavIGO.json";
-        private long freesize = 0L;
 
 
         public MainForm()
@@ -249,7 +248,7 @@ namespace MediaNavIGO
                                             {
                                                 if (long.TryParse(l.Split("=")[1].Replace("\"", null).Trim(), out long y))
                                                 {
-                                                    r = r.Replace(y.ToString(), (freesize - (new FileInfo(c.FullPath.Replace(".stm", null)).Length - oldsize)).ToString());
+                                                    r = r.Replace(y.ToString(), (y - (new FileInfo(c.FullPath.Replace(".stm", null)).Length - oldsize)).ToString());
                                                 }
                                             }
                                             nd += r;
@@ -346,7 +345,7 @@ namespace MediaNavIGO
                                 {
                                     if (long.TryParse(l.Split("=")[1].Replace("\"", null).Trim(), out long y))
                                     {
-                                        r = r.Replace(y.ToString(), (freesize - new FileInfo(file).Length).ToString());
+                                        r = r.Replace(y.ToString(), (y - new FileInfo(file).Length).ToString());
                                     }
                                 }
                                 nd += r;
@@ -714,7 +713,8 @@ namespace MediaNavIGO
                 if (File.Exists(ini))
                 {
                     IsMNV3 = false;
-                    IsCreationMode = false;                    
+                    IsCreationMode = false;
+                    long freesize = 0L;
                     foreach (var l in File.ReadAllLines(ini))
                     {
                         if (l.Contains('='))
