@@ -237,7 +237,7 @@ namespace MediaNavIGO
                                     {
                                         string nd = null;
                                         var ct = "purpose=\"copy\"" + Environment.NewLine;
-                                        foreach (var l in File.ReadAllLines(ini.FullPath))
+                                        foreach (var l in File.ReadAllLines(ini.FullPath).OrderBy(o => o))
                                         {
                                             var r = l.Replace(" ", null).Trim() + Environment.NewLine;
                                             if (!l.Split("=")[1].Contains("\""))
@@ -248,7 +248,13 @@ namespace MediaNavIGO
                                             {
                                                 if (long.TryParse(l.Split("=")[1].Replace("\"", null).Trim(), out long y))
                                                 {
-                                                    r = r.Replace(y.ToString(), (y - (new FileInfo(c.FullPath.Replace(".stm", null)).Length - oldsize)).ToString());
+                                                    long lw = new FileInfo(c.FullPath.Replace(".stm", null)).Length;
+                                                    long rs = lw - oldsize;
+                                                    if (lw < oldsize)
+                                                    {
+                                                        rs = oldsize - lw;
+                                                    }
+                                                    r = r.Replace(y.ToString(), (y - rs).ToString());
                                                 }
                                             }
                                             nd += r;
