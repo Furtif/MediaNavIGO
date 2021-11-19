@@ -38,6 +38,8 @@ namespace MediaNavIGO
         private bool IsMNV3 = false;
         private bool IsCreationMode = false;
         private readonly string configfile = "MediaNavIGO.json";
+        private long freesize = 0L;
+
 
         public MainForm()
         {
@@ -201,16 +203,16 @@ namespace MediaNavIGO
             toolStripProgressBarUpdate.Maximum = mylist.Count;
             foreach (var i in mylist)
             {
-                var md5 = GenerateMD5(File.ReadAllBytes(i.FullPath));
                 if (i.InUSB)
                 {
+                    var md5 = GenerateMD5(File.ReadAllBytes(i.FullPath));
                     var c = listUSB.Find(x => x.RealName.ToLower() == i.RealName.ToLower());
                     if (c != null)
                     {
                         try
                         {
-                            var contstm = File.ReadAllText(c.FullPath);
                             bool upt = false;
+                            long oldsize = 0L;
                             foreach (var s in File.ReadAllLines(c.FullPath))
                             {
                                 if (s.Contains("md5"))
@@ -218,34 +220,44 @@ namespace MediaNavIGO
                                     if (s.Split("=")[1].Trim() != md5)
                                         upt = true;
                                 }
+                                if (s.Contains("size"))
+                                {
+                                    if (long.TryParse(s.Split("=")[1].Replace("\"", null).Trim(), out long y))
+                                    {
+                                        oldsize = y;
+                                    }
+                                }
                             }
                             if (upt)
                             {
                                 File.Copy(i.FullPath, c.FullPath.Replace(".stm", null), true);
-                                foreach (var s in File.ReadAllLines(c.FullPath))
+                                if (!IsCreationMode) // ignore *.stm and *.md5 files if in creation mode.
                                 {
-                                    DateTime myDate1 = new DateTime(1970, 1, 9, 0, 0, 00);
-                                    DateTime myDate2 = DateTime.Now;
-                                    TimeSpan myDateResult;
-                                    myDateResult = myDate2 - myDate1;
-                                    int seconds = (int)myDateResult.TotalSeconds;
-                                    if (s.Contains("timestamp"))
+                                    var ini = listUSB.Find(i => i.FullPath.ToLower().EndsWith(@"\device_status.ini"));
+                                    if (ini != null)
                                     {
-                                        contstm = contstm.Replace(s.Split("=")[1].Trim(), seconds.ToString());
+                                        string nd = null;
+                                        var ct = "purpose=\"copy\"" + Environment.NewLine;
+                                        foreach (var l in File.ReadAllLines(ini.FullPath))
+                                        {
+                                            var r = l.Replace(" ", null).Trim() + Environment.NewLine;
+                                            if (!l.Split("=")[1].Contains("\""))
+                                            {
+                                                r = r.Replace(l.Split("=")[1], "\"" + l.Split("=")[1] + "\"");
+                                            }
+                                            if (l.Contains("freesize"))
+                                            {
+                                                if (long.TryParse(l.Split("=")[1].Replace("\"", null).Trim(), out long y))
+                                                {
+                                                    r = r.Replace(y.ToString(), (freesize - (new FileInfo(c.FullPath.Replace(".stm", null)).Length - oldsize)).ToString());
+                                                }
+                                            }
+                                            nd += r;
+                                        }
+                                        File.WriteAllBytes(ini.FullPath, Encoding.ASCII.GetBytes(nd)); // update freesize
+                                        File.WriteAllBytes(c.FullPath, Encoding.ASCII.GetBytes(ct)); // create .stm
+                                        File.WriteAllBytes(c.FullPath.Replace(".stm", null) + ".md5", Encoding.ASCII.GetBytes(md5)); // create .md5
                                     }
-                                    if (s.Contains("size"))
-                                    {
-                                        contstm = contstm.Replace(s.Split("=")[1].Trim(), new FileInfo(c.FullPath.Replace(".stm", null)).Length.ToString());
-                                    }
-                                    if (s.Contains("md5"))
-                                    {
-                                        contstm = contstm.Replace(s.Split("=")[1].Trim(), md5);
-                                    }
-                                }
-                                if (!IsCreationMode) // ignore *.stm files if in creation mode.
-                                {
-                                    File.WriteAllText(c.FullPath, contstm);//, Encoding.Unicode);
-                                    //File.WriteAllText(c.FullPath + ".md5", md5);
                                 }
                             }
                         }
@@ -315,23 +327,34 @@ namespace MediaNavIGO
                     }
                     string file = p + i.RealName;
                     File.Copy(i.FullPath, file, true);
-                    if (!IsCreationMode) // ignore *.stm files if in creation mode.
+                    if (!IsCreationMode) // ignore *.stm and *.md5 files if in creation mode.
                     {
-                        var sb = new StringBuilder();
-                        DateTime myDate1 = new DateTime(1970, 1, 9, 0, 0, 00);
-                        DateTime myDate2 = DateTime.Now;
-                        TimeSpan myDateResult;
-                        myDateResult = myDate2 - myDate1;
-                        int seconds = (int)myDateResult.TotalSeconds;
-                        sb.AppendLine("purpose = shadow");
-                        sb.AppendLine("size = " + new FileInfo(i.FullPath).Length.ToString());
-                        sb.AppendLine("content_id = ????????"); //TODO: ///
-                        sb.AppendLine("header_id = ????????"); //TODO: ///
-                        sb.AppendLine("timestamp = " + seconds.ToString());
-                        sb.AppendLine("md5 = " + md5);
-                        File.WriteAllText(file + ".stm", sb.ToString());
-                        //File.WriteAllText(file + ".md5", md5);
-                        //File.WriteAllText(file + ".stm.md5", GenerateMD5(file + ".stm"));
+                        var ini = listUSB.Find(i => i.FullPath.ToLower().EndsWith(@"\device_status.ini"));
+                        if (ini != null)
+                        {
+                            string nd = null;
+                            var md5 = GenerateMD5(File.ReadAllBytes(file));
+                            var ct = "purpose=\"copy\"" + Environment.NewLine;
+                            foreach (var l in File.ReadAllLines(ini.FullPath).OrderBy(o => o))
+                            {
+                                var r = l.Replace(" ", null).Trim() + Environment.NewLine;
+                                if (!l.Split("=")[1].Contains("\""))
+                                {
+                                    r = r.Replace(l.Split("=")[1], "\"" + l.Split("=")[1] + "\"");
+                                }
+                                if (l.Contains("freesize"))
+                                {
+                                    if (long.TryParse(l.Split("=")[1].Replace("\"", null).Trim(), out long y))
+                                    {
+                                        r = r.Replace(y.ToString(), (freesize - new FileInfo(file).Length).ToString());
+                                    }
+                                }
+                                nd += r;
+                            }
+                            File.WriteAllBytes(ini.FullPath, Encoding.ASCII.GetBytes(nd)); // update freesize
+                            File.WriteAllBytes(file + ".stm", Encoding.ASCII.GetBytes(ct)); // create .stm
+                            File.WriteAllBytes(file + ".md5", Encoding.ASCII.GetBytes(md5)); // create .md5
+                        }
                     }
                 }
                 i.Update = false;
@@ -691,15 +714,14 @@ namespace MediaNavIGO
                 if (File.Exists(ini))
                 {
                     IsMNV3 = false;
-                    IsCreationMode = false;
-                    long freesize = 0L;
+                    IsCreationMode = false;                    
                     foreach (var l in File.ReadAllLines(ini))
                     {
                         if (l.Contains('='))
                         {
                             var _1 = l.Split("=")[0].Trim();
                             var _2 = l.Split("=")[1].Trim();
-                            if (long.TryParse(_2, out long p))
+                            if (long.TryParse(_2.Replace("\"", null), out long p))
                             {
                                 if (_1 == "freesize")
                                 {
