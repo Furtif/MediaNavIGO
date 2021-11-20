@@ -744,16 +744,18 @@ namespace MediaNavIGO
                             if (int.TryParse(_2.Replace("\"", null).Replace(".", null), out int y) && _1.Equals("os_version"))
                             {
                                 if (y >= 100 && y <= 410)
-                                    deviceInfos.Add("device_version", "Media Nav [1]");
-                                else if (y >= 528 && y <= 913)
-                                    deviceInfos.Add("device_version", "MediaNav Evolution [2] (2015 - mid 2018)");
+                                    deviceInfos.Add("device_version", "Media Nav");
+                                else if (y == 912)
+                                    deviceInfos.Add("device_version", "Media Nav"); // Evolution late 2016"); // according toolbox name
+                                else if (y >= 913)
+                                    deviceInfos.Add("device_version", "Media Nav Evolution late 20XX");
                                 else if (y >= 10128)
                                 {
                                     IsMNV3 = true;
-                                    deviceInfos.Add("device_version", "Media Nav Evolution [3] (LATE 2018)");
+                                    deviceInfos.Add("device_version", "Media Nav Evolution late 2018");
                                 }
                                 else
-                                    deviceInfos.Add("device_version", "Media Nav [??] [??] (??)");
+                                    deviceInfos.Add("device_version", "Media Nav Evolution late 202x");
                             }
                         }
                     }
