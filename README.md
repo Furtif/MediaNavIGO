@@ -16,7 +16,7 @@ Download the bot from the [release](https://github.com/Furtif/MediaNavIGO/releas
 
 ### `Dependencies`
  - Microsoft [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
- - ToolBox
+ - ToolBox (Renault, Dacia, Naviextras, or others)
  <!-- Microsoft [VisualStudio 2022](https://visualstudio.microsoft.com/fr/vs/preview/)-->
 
 ## `Developers and Contributors`
@@ -28,7 +28,7 @@ To contribute to development, you will need to download and install the required
 - [Git](https://git-scm.com/downloads)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/fr/vs/preview/)
 - [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
-- ToolBox
+- ToolBox (Renault, Dacia, Naviextras, or others)
 
 ### `Cloning Source Code`
 
