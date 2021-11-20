@@ -64,6 +64,7 @@
             this.pictureBoxAbout = new System.Windows.Forms.PictureBox();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonGenMicomInis = new System.Windows.Forms.Button();
             this.progressBarUpdate = new System.Windows.Forms.ProgressBar();
             this.buttonStartUpdate = new System.Windows.Forms.Button();
@@ -77,6 +78,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxUSB = new System.Windows.Forms.TextBox();
             this.FolderBrowserDialogBoth = new System.Windows.Forms.FolderBrowserDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.ContextMenuStripUSB.SuspendLayout();
             this.StatusStripStats.SuspendLayout();
             this.ContextMenuStripLocal.SuspendLayout();
@@ -87,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).BeginInit();
             this.tabControlMain.SuspendLayout();
             this.tabPageConfig.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).BeginInit();
             this.SuspendLayout();
             // 
@@ -403,6 +413,7 @@
             // 
             // tabPageConfig
             // 
+            this.tabPageConfig.Controls.Add(this.groupBox1);
             this.tabPageConfig.Controls.Add(this.buttonGenMicomInis);
             this.tabPageConfig.Controls.Add(this.progressBarUpdate);
             this.tabPageConfig.Controls.Add(this.buttonStartUpdate);
@@ -423,6 +434,25 @@
             this.tabPageConfig.TabIndex = 2;
             this.tabPageConfig.Text = "Main [config/commands]";
             this.tabPageConfig.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox1.Location = new System.Drawing.Point(652, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(659, 472);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tip\'s and steps:";
             // 
             // buttonGenMicomInis
             // 
@@ -550,6 +580,86 @@
             this.textBoxUSB.Size = new System.Drawing.Size(371, 27);
             this.textBoxUSB.TabIndex = 0;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(34, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(343, 20);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "2 - Open Renault or Dacia or Naviextra Toolbox.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(34, 94);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(400, 20);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "4 - Choice \"Dealer Points of Interest\" for free 0.00 EUR. ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(34, 73);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(163, 20);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "3 - Login into Toolbox";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(34, 114);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(272, 20);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "5 - Use this program to update items.";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(34, 134);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(553, 20);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "6 - Once this program has finished updating the items go back to the toolbox.";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(34, 154);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(283, 20);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "7 - Complete the purchase at 0.00 EUR.";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(34, 174);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(485, 20);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "8 - Click \"Exit\" into toolbox and ready ;), insert usb key in MediaNav.";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(34, 33);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(394, 20);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "1 - Create a image USB of MediaNav and select folders.";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -577,6 +687,8 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageConfig.ResumeLayout(false);
             this.tabPageConfig.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -632,5 +744,14 @@
         private ToolStripStatusLabel toolStripStatusLabelReadyTxt;
         private ToolStripStatusLabel toolStripStatusLabelReady;
         private Button buttonGenMicomInis;
+        private GroupBox groupBox1;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private Label label4;
+        private Label label10;
+        private Label label9;
+        private Label label11;
     }
 }

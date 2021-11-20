@@ -13,7 +13,7 @@ namespace MediaNavIGO
         private readonly List<ItemSetting> listUSB = new();
         private readonly List<ItemSetting> listLOCAL = new();
         private readonly List<ItemSetting> listReady = new();
-        private readonly Dictionary<string, string> deviceInfos = new();
+        private Dictionary<string, string> deviceInfos = new();
         private Color origusbtextback;
         private Color origusbtextfore;
         //filters of emuns FolderType
@@ -813,6 +813,7 @@ namespace MediaNavIGO
                     deviceInfos.Add("mode", "create");
                     IsCreationMode = true;
                 }
+                //deviceInfos = new Dictionary<string, string>(deviceInfos.OrderBy(o => o.Key));
                 fastObjectListViewDevice.SetObjects(deviceInfos);
                 UpdateStatus();
             }
@@ -893,6 +894,7 @@ namespace MediaNavIGO
                 LoadUSBFolder();
             }
         }
+
 
         /*
         public static string Decrypt(string cipherText)
