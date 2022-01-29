@@ -38,7 +38,7 @@ namespace MediaNavIGO
         private bool IsMNV3 = false;
         private bool IsCreationMode = false;
         private readonly string configfile = "MediaNavIGO.json";
-
+        //private byte[] allUsbBytes = Array.Empty<byte>();
 
         public MainForm()
         {
@@ -741,21 +741,26 @@ namespace MediaNavIGO
                                 }
                             }
                             deviceInfos.Add(_1, _2);
+                            if (_2.Contains('_'))
+                                _2 = _2.Split( "_", StringSplitOptions.TrimEntries)[0];
                             if (int.TryParse(_2.Replace("\"", null).Replace(".", null), out int y) && _1.Equals("os_version"))
                             {
                                 if (y >= 100 && y <= 410)
                                     deviceInfos.Add("device_version", "Media Nav");
                                 else if (y == 912)
                                     deviceInfos.Add("device_version", "Media Nav"); // Evolution late 2016"); // according toolbox name
-                                else if (y >= 913)
-                                    deviceInfos.Add("device_version", "Media Nav Evolution late 20XX");
+                                else if (y >= 913 && y <= 10128)
+                                    deviceInfos.Add("device_version", "Media Nav Evolution");
                                 else if (y >= 10128)
                                 {
                                     IsMNV3 = true;
                                     deviceInfos.Add("device_version", "Media Nav Evolution late 2018");
                                 }
                                 else
+                                {
+                                    IsMNV3 = true;
                                     deviceInfos.Add("device_version", "Media Nav Evolution late 202x");
+                                }
                             }
                         }
                     }
