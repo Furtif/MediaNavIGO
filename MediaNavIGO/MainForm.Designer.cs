@@ -64,6 +64,8 @@
             this.pictureBoxAbout = new System.Windows.Forms.PictureBox();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageConfig = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.buttonGenMicomInis = new System.Windows.Forms.Button();
             this.progressBarUpdate = new System.Windows.Forms.ProgressBar();
             this.buttonStartUpdate = new System.Windows.Forms.Button();
@@ -77,8 +79,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxUSB = new System.Windows.Forms.TextBox();
             this.FolderBrowserDialogBoth = new System.Windows.Forms.FolderBrowserDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.ContextMenuStripUSB.SuspendLayout();
             this.StatusStripStats.SuspendLayout();
             this.ContextMenuStripLocal.SuspendLayout();
@@ -89,8 +89,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAbout)).BeginInit();
             this.tabControlMain.SuspendLayout();
             this.tabPageConfig.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).BeginInit();
             this.SuspendLayout();
             // 
             // ContextMenuStripUSB
@@ -426,15 +426,37 @@
             this.tabPageConfig.Text = "Main [config/commands]";
             this.tabPageConfig.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.Location = new System.Drawing.Point(670, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(663, 445);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tips:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(17, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(295, 35);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Not tips so far.....";
+            // 
             // buttonGenMicomInis
             // 
             this.buttonGenMicomInis.Enabled = false;
             this.buttonGenMicomInis.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonGenMicomInis.Location = new System.Drawing.Point(534, 449);
+            this.buttonGenMicomInis.Location = new System.Drawing.Point(511, 449);
             this.buttonGenMicomInis.Name = "buttonGenMicomInis";
-            this.buttonGenMicomInis.Size = new System.Drawing.Size(112, 29);
+            this.buttonGenMicomInis.Size = new System.Drawing.Size(135, 29);
             this.buttonGenMicomInis.TabIndex = 11;
-            this.buttonGenMicomInis.Text = "Micom ini\'s";
+            this.buttonGenMicomInis.Text = "Gen Micom ini\'s";
             this.buttonGenMicomInis.UseVisualStyleBackColor = true;
             this.buttonGenMicomInis.Click += new System.EventHandler(this.ButtonGenMicomInis_Click);
             // 
@@ -442,7 +464,7 @@
             // 
             this.progressBarUpdate.Location = new System.Drawing.Point(145, 450);
             this.progressBarUpdate.Name = "progressBarUpdate";
-            this.progressBarUpdate.Size = new System.Drawing.Size(383, 27);
+            this.progressBarUpdate.Size = new System.Drawing.Size(360, 27);
             this.progressBarUpdate.TabIndex = 10;
             // 
             // buttonStartUpdate
@@ -551,28 +573,6 @@
             this.textBoxUSB.Size = new System.Drawing.Size(371, 27);
             this.textBoxUSB.TabIndex = 0;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(670, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(663, 445);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tips:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Showcard Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(17, 60);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(295, 35);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Not tips so far.....";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -600,9 +600,9 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageConfig.ResumeLayout(false);
             this.tabPageConfig.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewDevice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

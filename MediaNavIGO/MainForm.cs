@@ -470,7 +470,7 @@ namespace MediaNavIGO
                     {
                         if (p > 0)
                         {
-                            real = real.Replace(i, null);
+                            //real = real.Replace(i, null);
                         }
                     }
                 }
@@ -485,7 +485,14 @@ namespace MediaNavIGO
                         real = real.Replace("_", null);
                         break;
                 }
-                real = real.Replace("Extended.", "_Ext.");
+                if (real.Contains("ext."))
+                {
+                    if (!real.Contains("_"))
+                    {
+                        real = real.Replace("ext.", "_ext.");
+                    }
+                }
+                real = real.Replace("Extended.", "_ext.");
                 real = real.Replace("Fast.", "Fastest.");
                 real = real.Replace("Short.", "Shortest.");
                 real = real.Replace("Economical.", "Economic.");
