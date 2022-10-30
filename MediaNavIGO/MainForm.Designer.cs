@@ -562,9 +562,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 20);
+            this.label1.Size = new System.Drawing.Size(147, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "NaviSync USB Folder:";
+            this.label1.Text = "NaviSync USB Driver:";
             // 
             // textBoxUSB
             // 
